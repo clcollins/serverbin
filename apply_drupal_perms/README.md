@@ -16,7 +16,7 @@ None reported
 
 ###Version###
 
-This Readme.md file is up-to-date with apply_drupal_perms version 2.2.
+This Readme.md file is up-to-date with apply_drupal_perms version 2.21.
 
 ###AUTHOR###
 

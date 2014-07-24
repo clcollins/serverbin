@@ -16,7 +16,7 @@ None reported
 
 ###Version###
 
-This Readme.md file is up-to-date with apply_wp_perms version 2.1.
+This Readme.md file is up-to-date with apply_wp_perms version 2.11.
 
 ###AUTHOR###
 

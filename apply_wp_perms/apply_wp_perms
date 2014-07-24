@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Version 2.1
+# Version 2.11
 
 MY_GROUPS="$@"
 ADMIN_GROUP='admin'
