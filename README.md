@@ -8,10 +8,10 @@ hdafs
 
 Script for managing AFS permssions - setting or resetting directory permssions for a user
 
-###SYNOPSIS###
+**SYNOPSIS**
       hdafs [-h] [-erRvV] [-s USER -p PERMISSION]
 
-###DESCRIPTION###
+**DESCRIPTION**
       Set, reset, or examine AFS permissions
     
       -h  show this help text
@@ -31,20 +31,20 @@ Script for managing AFS permssions - setting or resetting directory permssions f
 apply_wp_perms
 --------------
 
-*SYNOPSIS*
+**SYNOPSIS**
       apply_wp_perms <GROUP> [<GROUP>...]
 
-*DESCRIPTION*
+**DESCRIPTION**
       Set WordPress permissions for one or more groups based on the WordPress 
       codex "Hardening WordPress" page.
 
 apply_drupal_perms
 ------------------
 
-*SYNOPSIS*
+**SYNOPSIS**
       apply_drupal_perms <GROUP> [<GROUP>...]
 
-*DESCRIPTION*
+**DESCRIPTION**
       Set Drupal permissions for one or more groups based on best practices
       for security.
 
