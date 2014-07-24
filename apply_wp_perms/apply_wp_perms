@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Version 2.1
+
+MY_GROUPS="$@"
+ADMIN_GROUP='admin'
+
+
+if [ -z "${MY_GROUPS}" ]; then
+  echo "Usage : apply_wp_perms <GROUPNAME>";
+  exit 1;
+fi
+
+DATE=$(date "+%Y%m%d")
+DIR=$(pwd | awk -F / '{print $NF}')
+DIRPATH=$(pwd | sed 's|/|-|g' |sed 's/-//')
+
+f_confirm() {
+        echo -n "$1 "
+        read ans
+        case "$ans" in
+        y|Y|yes|YES|Yes) return 0 ;;
+        *) echo Exiting; return 1 ;;
+        esac
+}
+
+f_doit() {
+# WordPress perms, per WP Codex 'Hardening WordPress
+# ORDER HERE IS IMPORTANT
+/bin/chown -R root.$MY_GROUP ./
+/bin/chown apache.$MY_GROUP ./.htaccess
+/bin/chown -R apache.$MY_GROUP ./wp-content/
+/bin/chown -R root.$MY_GROUP ./wp-content/themes/
+/bin/chown -R root.$MY_GROUP ./wp-content/plugins/
+
+# Basic ACLs for group ownership
+/usr/bin/find . -type d -print0 | xargs -0 /bin/chmod 2775 
+/usr/bin/find . -type f -print0 | xargs -0 /bin/chmod 0664 
+
+# Remove any potentially funky ACLs
+/usr/bin/find . -exec /usr/bin/setfacl -b {} +
+
+# Basic Extended ALCs for groups ownership
+/usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m d:group::rwx
+/usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m group::rwx
+/usr/bin/find . -type f -print0 | xargs -0 /usr/bin/setfacl -m group::rw-
+
+# Extended ACLs for the actual group
+/usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m d:g:$MY_GROUP:rwx
+/usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m g:$MY_GROUP:rwx
+/usr/bin/find . -type f -print0 | xargs -0 /usr/bin/setfacl -m g:$MY_GROUP:rw-
+
+# Extended ACLs for the Linux admins
+/usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m d:g:$ADMIN_GROUP:rwx
+/usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m g:$ADMIN_GROUP:rwx
+/usr/bin/find . -type f -print0 | xargs -0 /usr/bin/setfacl -m g:$ADMIN_GROUP:rw-
+
+}
+
+if [ "$DIR" != "html" ] ; then
+	f_confirm "The current directory is not an \"html\" directory.  Do you want to continue anyway? (y/n)" && f_doit
+else
+  # Make a backup
+  getfacl -R . > /tmp/$DATE_$DIRPATH.acls
+
+  if [[ ! -f /tmp/$DATE_$DIRPATH.acls ]] ; then
+    echo "Unable to make ACL backup file! Aborting."
+    exit 1
+  fi
+
+  # Remove any potentially funky ACLs
+  /usr/bin/find . -exec /usr/bin/setfacl -b {} +
+  for MY_GROUP in $MY_GROUPS ; do
+    f_doit
+  done
+
+  echo ""
+  echo "Done.  You can restore old acls with:"
+  echo -e "\t$ cd $(pwd)"
+  echo -e "\t$ tsetfacl --restore /tmp/$DATE_$DIRPATH.acls"
+  echo ""
+fi
+

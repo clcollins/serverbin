@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+WORKDIR="$(pwd)"
+USAGE="
+  $(basename "$0") [-h] [-erRv] [-s user -p permissions] -- set or reset AFS permissions
+
+    where:
+        -h  show this help text
+        -e  examine existing permissions
+        -r  apply permissions recursively
+        -s  set the user(s) permissions (requires -p)
+        -p  permissions
+        -v  print the script version
+    
+    permissions:
+        all    Full AFS permissions (rlidwka)
+        write  Write permissions (rliwk)
+        read   Read-only permissions (rl)
+        none   No permissions
+"
+
+f_doit() {
+  # Not Recursive; run the command on the current
+  # directory only
+  eval $COMMAND $WORKDIR
+}
+
+f_recurse() {
+  # Find all the directorys in our currend directory tree
+  # and run the command passed in by the originating function
+  find $WORKDIR -type d -print0 | xargs -0 $COMMAND
+}
+
+f_setuser() {
+  COMMAND="fs sa -acl $USER $PERMS -dir"
+  if [ $RECURSE ] ; then
+    f_recurse
+  else
+    f_doit
+  fi
+}
+
+f_reset() {
+  # Reset all ACLs to admins ALL and anyuser READ
+  COMMAND="fs sa -clear -acl afs.operators all system:administrators all vhosts:administrators all system:anyuser rl -dir"
+  if [ $RECURSE ] ; then
+    f_recurse
+  else
+    f_doit
+  fi
+}
+
+### First, do a sanity check ###
+
+# Need to pass arguments
+if [[ $# -eq 0 ]] ; then
+  echo -e "\n  hdafs requires at least one argument or flag" >&2
+  echo "$USAGE" >&2
+  exit 1
+elif [[ "$RESET" ]] && [[ "$SETUSER" ]]; then
+  # Test if -R was used with -s
+  echo -e "\n  -R (reset) and -s (set user perms) are not compatible" >&2
+  echo "$USAGE" >&2
+  exit 1
+# Test if -R was used with -p
+elif [[ "$RESET" ]] && [[ "$PERMS" ]]; then
+  echo -e "\n  -R (reset) and -p (permissions) are not compatible" >&2
+  echo "$USAGE" >&2
+  exit 1
+# Test if -s was used without -p
+elif [[ ! -z "$SETUSER" ]] && [[ -z $PERMS ]] ; then
+  echo -e "\n  The -s flag requires the -p flag" >&2
+  echo "$USAGE " >&2
+  exit 1
+elif [[ $PERMS ]] ; then
+  case $PERMS in
+    [aA]ll) # Valid
+            ;;
+     write) # Valid
+            ;;
+      read) # Valid
+            ;;
+      none) # Valid
+            ;;
+         *) echo -e "\n  Valid parameters for -p are all, write, read or none" >&2
+            echo "$USAGE" >&2
+            exit 1
+            ;;
+  esac
+fi
+
+# Do stuff if we pass the sanity check
+while getopts 'herRs:p:v' OPTION; do
+  case "$OPTION" in 
+    h) echo "$USAGE"
+       exit
+       ;;
+    e) fs la $WORKDIR
+       exit
+       ;;
+    r) RECURSE=true
+       ;;
+    #R) RESET=true
+    #   ;;
+    p) PERMS="$OPTARG"
+       ;;
+    s) USER="$OPTARG"
+       SETUSER=true
+       ;;
+    v) echo "$(basename "$0") v1.1"
+       exit
+       ;;
+    :) echo -e "Missing parameter for $OPTARG" >&2
+       echo "$USAGE" >&2
+       exit 1
+       ;;
+   \?) echo -e "Illegal option: $OPTAGR" >&2
+       echo "$USAGE" >&2
+       exit 1
+       ;;
+  esac
+done
+
+if [[ "$SETUSER" ]] ; then
+  f_setuser
+  exit
+fi
+
+if [[ "$RESET" ]] ; then
+  f_reset
+  exit
+fi
