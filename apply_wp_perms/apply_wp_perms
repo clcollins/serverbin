@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Version 2.11
+# Version 2.12
 
 MY_GROUPS="$@"
 ADMIN_GROUP='admin'
@@ -36,9 +36,6 @@ f_doit() {
 # Basic ACLs for group ownership
 /usr/bin/find . -type d -print0 | xargs -0 /bin/chmod 2775 
 /usr/bin/find . -type f -print0 | xargs -0 /bin/chmod 0664 
-
-# Remove any potentially funky ACLs
-/usr/bin/find . -exec /usr/bin/setfacl -b {} +
 
 # Basic Extended ALCs for groups ownership
 /usr/bin/find . -type d -print0 | xargs -0 /usr/bin/setfacl -m d:group::rwx
