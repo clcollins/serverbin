@@ -1,6 +1,8 @@
 apply_wp_perms
 ==============
 
+_Version 2.12 - 20141107_
+
 Script to recursively set ([WordPress](http://wordpress.org)) permissions on a document root, according to best practices from WordPress' [Hardening WordPress](http://codex.wordpress.org/Hardening_WordPress) page. 
 
 ###SYNOPSIS###

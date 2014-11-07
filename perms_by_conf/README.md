@@ -1,16 +1,13 @@
-apply_drupal_perms
+perms_by_conf.py
 ==============
 
-_Version 2.21 - 20141107_
+_Version 1.0 - 20141107_
 
-Script to recursively set ([Drupal](http://wordpress.org)) permissions on a document root, according to best practices for security. 
+Script to recursively set permissions on a document root based on a .yaml file used for configuration.
 
 ###SYNOPSIS###
-      apply_drupal_perms <GROUP> [<GROUP>...]
 
-###DESCRIPTION###
-      Set Drupal permissions for one or more groups based on best practices
-      for security.
+     perms_by_conf.py <yaml_file> 
 
 ###Known Issues###
 
@@ -18,7 +15,7 @@ None reported
 
 ###Version###
 
-This Readme.md file is up-to-date with apply_drupal_perms version 2.21.
+This Readme.md file is up-to-date with perms_by_conf.py Version 1.0
 
 ###AUTHOR###
 

@@ -1,0 +1,17 @@
+---
+base: /srv/web/example.org/html 
+webserver: apache
+user: root
+group: root
+altgroups:
+  - foo
+  - bar
+exceptions:
+  - path: index.php 
+    user: baz
+    group: foo
+  - path: test.dir/foo
+    user: baz
+    group: bar
+    recurse: True
+
