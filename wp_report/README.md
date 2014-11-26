@@ -12,6 +12,7 @@ Script to discover if WordPress is installed in the root of a given path, and co
 ###Known Issues###
 
 1. Does not search in subdirectories - feature to be added
+2. Does not identify which plugins are needing updates - feature to be added
 
 ###Version###
 
