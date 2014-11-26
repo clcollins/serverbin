@@ -15,7 +15,7 @@ None reported
 
 ###Version###
 
-This Readme.md file is up-to-date with perms_by_conf.py Version 1.0
+This Readme.md file is up-to-date with perms_by_conf.py Version 1.2
 
 ###AUTHOR###
 
