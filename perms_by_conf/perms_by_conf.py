@@ -1,26 +1,7 @@
 #!/usr/bin/env python
 
-# Version 1.0 - 20141107
-
-# Copyright Information
-# ---------------------
-#
-#
-#
-# Copyright (C) 2014 Chris Collins
-#
-# This program is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the Free
-# Software Foundation, either version 3 of the License, or (at your option)
-# any later version.
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-# more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program. If not, see http://www.gnu.org/licenses/.
+# Version 1.2 - 20141126
+# https://github.com/clcollins/serverbin/perms_by_conf
 
 import yaml
 import sys
@@ -33,8 +14,8 @@ gids = []
 admin_group = "admin"
 webpath = "/srv/web"
 
-wpconfig = "wp-config.php"
-drusettings = "site/default/settings.php"
+wpconfig = "wp-includes/version.php"
+drusettings = "sites/default/settings.php"
 
 
 def err(message):
@@ -143,6 +124,9 @@ def do_exceptions(path, exceptions):
 
         item = '/'.join([path, epath])
         if recurse is True:
+
+            try_chown(item, uid, gid)
+
             for root, dirs, files in os.walk(item, topdown=False):
                 for dir in dirs:
                     thisdir = os.path.join(root, dir)
@@ -181,12 +165,15 @@ def main():
     user = data.get('user', 'root')
     group = data.get('group', 'root')
     altgroups = data.get('altgroups', None)
+    if altgroups is None:
+        altgroups = []
 
     wp_exceptions = [
         {'path': '.htaccess', 'user': webserver},
         {'path': 'wp-content', 'user': webserver},
         {'path': 'wp-content/cache', 'user': webserver, 'recurse': True},
         {'path': 'wp-content/blogs.dir', 'user': webserver, 'recurse': True},
+        {'path': 'wp-content/uploads', 'user': webserver, 'recurse': True},
 
     ]
 
@@ -206,6 +193,8 @@ def main():
     recurse_perms(path, uid, gids)
 
     exceptions = data.get('exceptions', None)
+    if exceptions is None:
+        exceptions = []
     check_for_cms(path, exceptions, wp_exceptions, dru_exceptions)
 
     if exceptions is not None:

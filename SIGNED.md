@@ -3,9 +3,9 @@
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEABECAAYFAlR190EACgkQte6EFif3vze3SwCgpAHpdhHY4Cshk2X6bQQfMqxK
-2+IAoMvF/iYWkZd7+xeCM2hOkf9DeElk
-=yHlR
+iEYEABECAAYFAlR19/AACgkQte6EFif3vzddNwCgyY0E/NLfp6m79nu/ZpbaZC/1
+6jwAoIEXkD1cQE6flcPwg351hBYMcGkk
+=/ctX
 -----END PGP SIGNATURE-----
 
 ```
@@ -32,9 +32,9 @@ size   exec  file                    contents
 1763             README.md           5e911bb3c5830edde22ec545d4580642b909c1f87c775ac170b78cae4c84177c
 2959   x         hdafs               fa310952d889e09f4666e4825af774f9642078511f04a0d3ddaa8d919a459192
                perms_by_conf/                                                                        
-1096             README.md           8d6d1bba78bdb97ce6a58e59411c5677df53206ccfbe78be8773b706d4e6ff35
+1096             README.md           19eb716ef34d243d6769c61ee7b37ca6cc3f2372028831a87c443155dafc3029
 238              example.yaml        c452554b0a1be79bf7ac572e40d03c69dae1632b3993bb86c50a074e321b4a2b
-5710   x         perms_by_conf.py    2308c5a6db5af633ca54d4df9db055ec354eabfaa3cf8f9cae7db348a6b5a626
+5270   x         perms_by_conf.py    692e1be2acde0c15c06bb4a69944d89be234ff612835a0b0fbcf9d0452dc2b60
                wp_report/                                                                            
 1140             README.md           9d92e90c7345072fe34d87e4286ab7d32a7eaccc9a7407c0c2bf84a59cc70e97
 2121   x         wp_report.py        eeefefa46b8e0f283135aab6a67ca8d94836ccb7d1b8e485d81a0c18821b55e8

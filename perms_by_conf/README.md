@@ -1,7 +1,7 @@
 perms_by_conf.py
 ==============
 
-_Version 1.0 - 20141107_
+_Version 1.2 - 20141126_
 
 Script to recursively set permissions on a document root based on a .yaml file used for configuration.
 
