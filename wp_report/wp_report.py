@@ -45,7 +45,6 @@ def dictify(blob):
     dict = {}
     for line in lines[1:len(lines) - 3]:
         splitline = line.split()
-        print len(splitline)
         if len(splitline) != 0:
             if len(splitline) == 2:
                 splitline.append("UNKNOWN")
