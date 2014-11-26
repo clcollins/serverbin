@@ -1,7 +1,7 @@
 wp_report.py
 ==============
 
-_Version 1.04 - 20141126_
+_Version 1.05 - 20141126_
 
 Script to discover if WordPress is installed in the root of a given path, and core, theme and plugin versions.
 
@@ -15,7 +15,7 @@ Script to discover if WordPress is installed in the root of a given path, and co
 
 ###Version###
 
-This Readme.md file is up-to-date with wp_report.py Version 1.02
+This Readme.md file is up-to-date with wp_report.py Version 1.05
 
 ###AUTHOR###
 

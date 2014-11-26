@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Version 1.04 - 20141126
+# Version 1.05 - 20141126
 # https://github.com/clcollins/serverbin/wp_report
 
 import sys
@@ -10,9 +10,10 @@ import subprocess
 import socket
 import json
 
+run_as_user = "apache"
 webpath = "/srv/web"
 wpcliurl = "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
-php = "php -d error_reporting=32759"
+php = "sudo -u %s php -d error_reporting=32759" % run_as_user
 wpcli = webpath + "/bin/wp-cli.phar"
 wpconfig = "wp-includes/version.php"
 drusettings = "sites/default/settings.php"
