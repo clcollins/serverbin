@@ -3,9 +3,9 @@
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEABECAAYFAlR19/AACgkQte6EFif3vzddNwCgyY0E/NLfp6m79nu/ZpbaZC/1
-6jwAoIEXkD1cQE6flcPwg351hBYMcGkk
-=/ctX
+iEYEABECAAYFAlR1+VkACgkQte6EFif3vzdOLQCgp3y5tH4jqypZtY/o5TZgepkS
+XQQAn2jYtLE8g0czRtBh9vMdq4rc0T6O
+=BtXF
 -----END PGP SIGNATURE-----
 
 ```
@@ -20,7 +20,7 @@ iEYEABECAAYFAlR19/AACgkQte6EFif3vzddNwCgyY0E/NLfp6m79nu/ZpbaZC/1
 size   exec  file                    contents                                                        
              ./                                                                                      
 35120          LICENSE               fe3eea6c599e23a00c08c5f5cb2320c30adc8f8687db5fcec9b79a662c53ff6b
-2362           README.md             fddefea3433caa8eb03dff17cddbc808d5ae8eeeda7ffb5bcfea3f03a010366a
+2301           README.md             34999b6c5d7cf0868405be1e2f448639db1108d915e3a35d42c6e7a36726b812
                apply_drupal_perms/                                                                   
 1259             README.md           e309d90a716da45f69288cbadb45aa5c2e590f36778eee09d319ee0e9cb921da
 3119   x         apply_drupal_perms  bc6e0783447879e6ef8589040b2339e250bbd5348762f47bbd85b4f07ef011a4
