@@ -39,8 +39,7 @@ apply_wp_perms
 
 **DESCRIPTION**
 
-      Set WordPress permissions for one or more groups based on the WordPress 
-      codex "Hardening WordPress" page.
+      Set WordPress permissions for one or more groups based on the WordPress codex "Hardening WordPress" page.
 
 apply_drupal_perms
 ------------------
@@ -51,8 +50,30 @@ apply_drupal_perms
 
 **DESCRIPTION**
 
-      Set Drupal permissions for one or more groups based on best practices
-      for security.
+      Set Drupal permissions for one or more groups based on best practices for security.
+
+perms_by_conf
+-------------
+
+**SYNOPSIS**
+
+      perms_by_conf.py <yaml_file>
+
+**DESCRIPTION**
+
+      Script to recursively set permissions on a document root based on a .yaml file used for configuration.
+
+wp-report
+---------
+
+**SYNOPSIS**
+
+     wp_report.py <PATH>
+
+**DESCRIPTION**
+
+     Discover if WordPress is installed in the root of a given path, and core, theme and plugin versions.
+
 
 ###AUTHOR###
 

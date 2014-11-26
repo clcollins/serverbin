@@ -3,9 +3,9 @@
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEABECAAYFAlRdBXAACgkQte6EFif3vzezKwCg3CFOIvq0CpE9dpGurYNOFKKX
-q2MAnjRiHCSnGRC4KpFPRGwPPd4EbAes
-=hHsz
+iEYEABECAAYFAlR190EACgkQte6EFif3vze3SwCgpAHpdhHY4Cshk2X6bQQfMqxK
+2+IAoMvF/iYWkZd7+xeCM2hOkf9DeElk
+=yHlR
 -----END PGP SIGNATURE-----
 
 ```
@@ -20,7 +20,7 @@ q2MAnjRiHCSnGRC4KpFPRGwPPd4EbAes
 size   exec  file                    contents                                                        
              ./                                                                                      
 35120          LICENSE               fe3eea6c599e23a00c08c5f5cb2320c30adc8f8687db5fcec9b79a662c53ff6b
-1983           README.md             37b4df9b41d609f6e89859e12d4f6aceddae6ddf6c833cf930f96f350c2ab7f2
+2362           README.md             fddefea3433caa8eb03dff17cddbc808d5ae8eeeda7ffb5bcfea3f03a010366a
                apply_drupal_perms/                                                                   
 1259             README.md           e309d90a716da45f69288cbadb45aa5c2e590f36778eee09d319ee0e9cb921da
 3119   x         apply_drupal_perms  bc6e0783447879e6ef8589040b2339e250bbd5348762f47bbd85b4f07ef011a4
@@ -35,6 +35,9 @@ size   exec  file                    contents
 1096             README.md           8d6d1bba78bdb97ce6a58e59411c5677df53206ccfbe78be8773b706d4e6ff35
 238              example.yaml        c452554b0a1be79bf7ac572e40d03c69dae1632b3993bb86c50a074e321b4a2b
 5710   x         perms_by_conf.py    2308c5a6db5af633ca54d4df9db055ec354eabfaa3cf8f9cae7db348a6b5a626
+               wp_report/                                                                            
+1140             README.md           9d92e90c7345072fe34d87e4286ab7d32a7eaccc9a7407c0c2bf84a59cc70e97
+2121   x         wp_report.py        eeefefa46b8e0f283135aab6a67ca8d94836ccb7d1b8e485d81a0c18821b55e8
 ```
 
 #### Ignore
