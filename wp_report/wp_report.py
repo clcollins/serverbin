@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
-# Version 1.0 - 20141126
+# Version 1.01 - 20141126
 # https://github.com/clcollins/serverbin/wp_report
 
 import sys
 import os
-import pwd
 import urllib
 import subprocess
 import socket
@@ -23,25 +22,13 @@ def err(message):
     sys.exit(1)
 
 
-def recurse_perms(path, uid, gids):
-
-    for root, dirs, files in os.walk(path, topdown=False):
-
-        for dir in dirs:
-            thisdir = os.path.join(root, dir)
-
-        for file in files:
-            thisfile = os.path.join(root, file)
-
-
 def check_for_cms(path):
     if os.path.isfile('/'.join([path, wpconfig])):
         return True
     elif os.path.isfile('/'.join([path, drusettings])):
-        print "DRUPAL INSTALL"
-	return False
+        err("Drupal install found")
     else:
-        return False
+        err("No CMS discovered")
 
 
 def inspect_wp(path, query):
@@ -70,12 +57,12 @@ def main():
         elif webpath not in path:
             err("Path must be a subdirectory of %s" % webpath)
 
-    data = dict(hostname = socket.getfqdn())
+    data = dict(hostname=socket.getfqdn())
     data['path'] = path
- 
+
     if check_for_cms(path):
         if not os.path.isfile(wpcli):
-            urllib.urlretrieve (wpcliurl, wpcli)
+            urllib.urlretrieve(wpcliurl, wpcli)
 
     data['version'] = inspect_wp(path, "core version")
     plugins = inspect_wp(path, "plugin status")
