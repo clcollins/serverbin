@@ -68,7 +68,7 @@ wp-report
 
 **SYNOPSIS**
 
-   wp_report.py <PATH>
+    wp_report.py <PATH>
 
 **DESCRIPTION**
 
