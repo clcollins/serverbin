@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Version 1.01 - 20141126
+# Version 1.02 - 20141126
 # https://github.com/clcollins/serverbin/wp_report
 
 import sys
@@ -12,6 +12,7 @@ import json
 
 webpath = "/srv/web"
 wpcliurl = "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
+php = "php -d error_reporting=32759"
 wpcli = webpath + "/bin/wp-cli.phar"
 wpconfig = "wp-includes/version.php"
 drusettings = "sites/default/settings.php"
@@ -32,7 +33,7 @@ def check_for_cms(path):
 
 
 def inspect_wp(path, query):
-    wpcliargs = "php %s --no-color --path=%s" % (wpcli, path)
+    wpcliargs = "%s %s --no-color --path=%s" % (php, wpcli, path)
     cmd = ' '.join([wpcliargs, query])
     inspect = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     return inspect.stdout.read()
