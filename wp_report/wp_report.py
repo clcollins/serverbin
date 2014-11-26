@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Version 1.02 - 20141126
+# Version 1.03 - 20141126
 # https://github.com/clcollins/serverbin/wp_report
 
 import sys
@@ -44,6 +44,8 @@ def dictify(blob):
     dict = {}
     for line in lines[1:len(lines) - 3]:
         splitline = line.split()
+        if len(splitline) < 3:
+            splitline.append("UNKNOWN")
         dict[splitline[1]] = splitline[2]
     return dict
 
