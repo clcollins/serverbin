@@ -3,9 +3,9 @@
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEABECAAYFAlR1+VkACgkQte6EFif3vzdOLQCgp3y5tH4jqypZtY/o5TZgepkS
-XQQAn2jYtLE8g0czRtBh9vMdq4rc0T6O
-=BtXF
+iEYEABECAAYFAlR1+ZQACgkQte6EFif3vzdD2QCfag4D+U2YL+jmP0N9BXhaV4ct
+IxsAoPTNyH7JyjH+XzQOf5INgR2v+n6G
+=hVaT
 -----END PGP SIGNATURE-----
 
 ```
@@ -32,7 +32,7 @@ size   exec  file                    contents
 1763             README.md           5e911bb3c5830edde22ec545d4580642b909c1f87c775ac170b78cae4c84177c
 2959   x         hdafs               fa310952d889e09f4666e4825af774f9642078511f04a0d3ddaa8d919a459192
                perms_by_conf/                                                                        
-1096             README.md           19eb716ef34d243d6769c61ee7b37ca6cc3f2372028831a87c443155dafc3029
+1096             README.md           d853acf508932ab9a929dfe8c16c61e375b0c95171df086aaa825dbc2edccfb1
 238              example.yaml        c452554b0a1be79bf7ac572e40d03c69dae1632b3993bb86c50a074e321b4a2b
 5270   x         perms_by_conf.py    692e1be2acde0c15c06bb4a69944d89be234ff612835a0b0fbcf9d0452dc2b60
                wp_report/                                                                            
