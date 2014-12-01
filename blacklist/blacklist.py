@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Version 0.5 - 20141201
+# Version 0.5.1 - 20141201
 # https://github.com/clcollins/serverbin/blacklist
 
 import urllib2
@@ -8,7 +8,6 @@ import sys
 import subprocess
 
 feed = "<SPACE SEPARATED IPs or IP/SUBNET LIST AT SOME URL>"
-inputPos = "5"
 testCmd = "/sbin/iptables -n -L %s"
 flushCmd = "/sbin/iptables -F %s"
 makeCmd = "/sbin/iptables -N %s"
