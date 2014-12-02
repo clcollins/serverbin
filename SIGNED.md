@@ -3,9 +3,9 @@
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEABECAAYFAlR83LQACgkQte6EFif3vzfZIQCgxS/xOeBg894AddbVHji7qiDJ
-hcQAoI8UDs3g2n5RGcEwgpaCqLGSIL8v
-=VI6v
+iEYEABECAAYFAlR+HikACgkQte6EFif3vzcLTACgvhQALs77u1w/4zxKPurcYhjV
+A0oAn2Ypc14MBPGQHtSzivoSc4N5NTDe
+=UXku
 -----END PGP SIGNATURE-----
 
 ```
@@ -29,8 +29,8 @@ size   exec  file                    contents
 1351             README.md           bb365493e65b35aa9aac759893d56329b4ad2a5d1adc2084ca8e9691fb0021f3
 3005   x         apply_wp_perms      ba643691f910163c6df47b813fe947f681755d3a746d7d6393fe2c9d95445f15
                blacklist/                                                                            
-1383             README.md           53b06750b774bd597d7b6bb2dc218b75154fc107c588d42ae8d45fa0de2b1979
-2571             blacklist.py        ed410923f34ff8ddfa37debdc9a0616382b9de04228a57bed226a8f5d61d92e9
+1379             README.md           0fca7ee4bc52f75594a8fbc9a10ba2ddbfdf587c10dc7f90f5372641febe2b21
+2230             blacklist.py        7a6576210ea83ee852d67c5a7ada7a3488d9f2e82ed1f231a48155b6846b0b61
                hdafs/                                                                                
 1763             README.md           5e911bb3c5830edde22ec545d4580642b909c1f87c775ac170b78cae4c84177c
 2959   x         hdafs               fa310952d889e09f4666e4825af774f9642078511f04a0d3ddaa8d919a459192

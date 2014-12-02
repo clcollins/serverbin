@@ -1,7 +1,7 @@
 blacklist.py
 ==============
 
-_Version 0.5.1 - 20141201_
+_Version 0.6 - 20141202_
 
 Script to grab [CIF-generated](https://code.google.com/p/collective-intelligence-framework/) list of IPs or IP+Subnet Mask from a URL and apply those rules to a "BLACKLIST" chain in IPTables
 
@@ -17,7 +17,7 @@ This script takes no arguments.
 
 ###Version###
 
-This Readme.md file is up-to-date with blacklist.py Version 0.5.1
+This Readme.md file is up-to-date with blacklist.py Version 0.6
 
 ###AUTHOR###
 

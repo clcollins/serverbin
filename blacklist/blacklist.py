@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-# Version 0.5.1 - 20141201
+# Version 0.6 - 20141202
 # https://github.com/clcollins/serverbin/blacklist
 
 import urllib2
 import sys
 import subprocess
+import re
 
 feed = "<SPACE SEPARATED IPs or IP/SUBNET LIST AT SOME URL>"
 testCmd = "/sbin/iptables -n -L %s"
@@ -21,62 +22,57 @@ def err(message):
 
 
 def makeChain():
-    print "Making chain"
     cmd = makeCmd % chain
-    make = subprocess.Popen(cmd,
-                            shell=True,
-                            stderr=subprocess.PIPE)
+    make = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
 
-    make_error = make.stderr.read()
-    if make_error:
-        err(make_error)
+    make_stdout, make_stderr = make.communicate()
+
+    if make_stderr:
+        err(make_stderr)
 
 
 def checkChain():
     cmd = testCmd % chain
-    print "Checking chain"
-    print cmd
-    check = subprocess.Popen(cmd,
-                             shell=True,
+    check = subprocess.Popen(cmd, shell=True,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
 
-    # I don't know why, but check.stdout.read() needs to be given to something
-    # or the whole thing freezes
-    check_stdout = check.stdout.read()
+    check_stdout, check_stderr = check.communicate()
 
-    check_error = check.stderr.read()
-    if check_error:
-        print (check_error + "\n")
-        makeChain()
+    gooderror = re.compile('iptables: No chain/target/match by that name.')
+
+    if check_stderr:
+        if gooderror.match(check_stderr):
+            makeChain()
+        else:
+            err(check_stderr)
     else:
-        print "No errors"
+        pass
 
 
 def flushRules():
     cmd = flushCmd % chain
-    print "Flushing chain"
-    flush = subprocess.Popen(cmd,
-                             shell=True,
-                             stderr=subprocess.PIPE)
+    flush = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
 
-    flush_error = flush.stderr.read()
-    if flush_error:
-        err(flush_error)
+    flush_stdout, flush_stderr = flush.communicate()
+
+    if flush_stderr:
+        err(flush_stderr)
 
 
 def applyRules(ip):
     cmd = insertCmd % (chain, ip)
     insert = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
-    insert_error = insert.stderr.read()
-    if insert_error:
-        err(insert_error)
+
+    insert_stdout, insert_stderr = insert.communicate()
+
+    if insert_stderr:
+        err(insert_stderr)
 
 
 def getIps():
     req = urllib2.Request(feed)
     try:
-        print "Getting IPs"
         response = urllib2.urlopen(req)
     except urllib2.URLError as e:
         if hasattr(e, 'reason'):
@@ -92,14 +88,8 @@ def getIps():
 
 
 def main():
-    print "checkchain1"
     checkChain()
-    print "checkchain2"
-    print "flushrules1"
     flushRules()
-    print "flushrules2"
-
-    print "applying rules"
     ips = getIps()
     for ip in ips:
         applyRules(ip)
