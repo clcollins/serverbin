@@ -13,7 +13,7 @@ This script takes no arguments.
 
 ###Known Issues###
 
-1. Subprocess check if BLACKLIST chain exists MUST be assigned to something, or the whole thing bombs out.  I'm not sure why this is yet.  Work around so far was to assign stdout to an unused variable.
+None Reported
 
 ###Version###
 
