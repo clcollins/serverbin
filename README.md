@@ -3,16 +3,27 @@ serverbin
 
 Scripts to ease server management. 
 
+afs_archive_delete
+------------------
+
+**SYNOPSIS**
+
+    afs_archive_delete PATH [PATH]... 
+
+**DESCRIPTION**
+
+Script to archive and delete AFS volumes
+
 hdafs
 -----
-
-Script for managing AFS permssions - setting or resetting directory permssions for a user
 
 **SYNOPSIS**
 
     hdafs [-h] [-erRvV] [-s USER -p PERMISSION]
 
 **DESCRIPTION**
+
+Script for managing AFS permssions - setting or resetting directory permssions for a user
 
     Set, reset, or examine AFS permissions
     
