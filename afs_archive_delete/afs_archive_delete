@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# Version 1.0 - 20141203
+# https://github.com/clcollins/serverbin/afs_archive_delete
+
+DATE=$(date '+%Y-%m-%d')
+ARCHIVE_DIR='/srv/afs_archives'
+
+usage() {
+
+  echo "Usage: archive_delete PATH [PATH]..."
+  echo "Archive and delete the AFS space in PATH"
+  echo "Example: archive_delete /afs/acpub/project/web/foo"
+  exit 1
+
+}
+
+if [[ -z "$1" ]] ; then
+  usage
+elif [[ "s$1" == "s--help" ]] ; then
+  usage
+elif [[ "s$1" == "s-h" ]] ; then
+  usage
+fi
+
+err() {
+  MSG="$1"
+  echo "ERROR: $MSG"
+  exit 1
+}
+
+zip_it() {
+  # Zip it good
+  SAFE_NAME="$1"
+  DST="${ARCHIVE_DIR}/${DATE}${SAFE_NAME}.zip"
+  SRC="$2"
+  echo "Zipping $SRC"
+
+  if [[ -f $DST ]] ; then
+    err "Archive \"$DST\" already exists"
+  fi
+
+  if zip -r  $DST $SRC; then
+    return 0
+  else
+    err "Failure archiving $SRC"
+  fi
+}
+
+rm_vos() {
+  VOS=$1
+  if vos remove -id $VOS ; then
+    return 0
+  else
+    err "Failure removing $VOS"
+  fi
+}
+
+rm_mount() {
+  MOUNT=$1
+  if fs rmmount $MOUNT ; then
+    return 0
+  else
+    err "Failure removing $MOUNT"
+  fi
+}
+
+check_exists() {
+  DIR="$1"
+  if [[ ! -d $DIR ]] ; then
+    err "\"$DIR\" does not exist"
+  else
+    return 0
+  fi
+}
+
+check_valid() {
+  VOLUME="$1"
+  VOLPATH=$(echo $VOLUME | awk -F/ '{print "/" $2 "/" $3 "/" $4}')
+  if [[ $VOLPATH != "/afs/acpub/project" ]] ; then
+    err "${VOL} is not in /afs/acpub/project.  Please process manually."
+  else
+    return 0
+  fi
+}
+
+for VOL in "$@" ; do 
+
+  VOL_CLEAN=${VOL%/}
+
+  check_exists $VOL_CLEAN
+  check_valid $VOL_CLEAN
+
+  VNAME=$(echo $VOL_CLEAN | sed 's|/|_|g')
+  VID=$(fs exa $VOL_CLEAN | awk '/Volume status/ {print $NF}')
+  
+  zip_it $VNAME $VOL_CLEAN
+  rm_mount $VOL_CLEAN
+  rm_vos $VID
+
+done
